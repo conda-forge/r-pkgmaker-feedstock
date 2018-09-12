@@ -1,5 +1,4 @@
-{% set version = '0.22' %}
-
+{% set version = '0.27' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,53 +9,67 @@ package:
 source:
   fn: pkgmaker_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/pkgmaker_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/pkgmaker/pkgmaker_{{ version }}.tar.gz
-  sha256: 19ad78c16bd5757333e7abbd5eebcec081deb494c9a4b6eec6919a3747b3386f
+    - {{ cran_mirror }}/src/contrib/pkgmaker_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/pkgmaker/pkgmaker_{{ version }}.tar.gz
+  sha256: 17a289d8f596ba5637b07077b3bff22411a2c2263c0b7de59fe848666555ec6a
 
 build:
+  merge_build_host: True  # [win]
   number: 0
   skip: true  # [win32]
-
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
+    - {{posix}}zip               # [win]
+  host:
     - r-base
+    - r-bibtex >=0.4
     - r-codetools
     - r-digest
+    - r-magrittr
     - r-registry
+    - r-stringi
     - r-stringr
+    - r-withr
     - r-xtable
-
   run:
     - r-base
+    - r-bibtex >=0.4
     - r-codetools
     - r-digest
+    - r-magrittr
     - r-registry
+    - r-stringi
     - r-stringr
+    - r-withr
     - r-xtable
 
 test:
   commands:
-    - $R -e "library('pkgmaker')"  # [not win]
+    - $R -e "library('pkgmaker')"           # [not win]
     - "\"%R%\" -e \"library('pkgmaker')\""  # [win]
 
 about:
   home: https://renozao.github.io/pkgmaker
   license: GPL (>= 2)
-  summary: |
-    This package provides some low-level utilities to use for package development. It
-    currently provides managers for multiple package specific options and registries,
-    vignette, unit test and bibtex related utilities. It serves as a base package for
-    packages like NMF, RcppOctave, doRNG, and as an incubator package for other general
-    purposes utilities, that will eventually be packaged separately. It is still under
-    heavy development and changes in the interface(s) are more than likely to happen.
+  summary: Provides some low-level utilities to use for package development. It currently provides
+    managers for multiple package specific options and registries, vignette, unit test
+    and bibtex related utilities. It serves as a base package for packages like NMF,
+    RcppOctave, doRNG, and as an incubator package for other general purposes utilities,
+    that will eventually be packaged separately. It is still under heavy development
+    and changes in the interface(s) are more than likely to happen.
   license_family: GPL3
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
+  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
 
 extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - daler
+    - jdblischak
+    - cbrueffer
+    - dbast
