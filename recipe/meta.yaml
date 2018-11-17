@@ -14,9 +14,9 @@ source:
   sha256: 17a289d8f596ba5637b07077b3bff22411a2c2263c0b7de59fe848666555ec6a
 
 build:
+  noarch: generic
   merge_build_host: True  # [win]
-  number: 0
-  skip: true  # [win32]
+  number: 1000
   rpaths:
     - lib/R/lib/
     - lib/
@@ -62,8 +62,7 @@ about:
     that will eventually be packaged separately. It is still under heavy development
     and changes in the interface(s) are more than likely to happen.
   license_family: GPL3
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'  # [unix]
-  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-3'  # [win]
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
 
 extra:
   recipe-maintainers:
