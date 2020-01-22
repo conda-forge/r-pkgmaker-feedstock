@@ -1,4 +1,4 @@
-{% set version = '0.27' %}
+{% set version = '0.31' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -7,16 +7,15 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: pkgmaker_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/pkgmaker_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/pkgmaker/pkgmaker_{{ version }}.tar.gz
-  sha256: 17a289d8f596ba5637b07077b3bff22411a2c2263c0b7de59fe848666555ec6a
+  sha256: cb12a54889f14d4d05d8fba890ffc7c981db301f81fb7fe6819c777ea7d98631
 
 build:
-  noarch: generic
   merge_build_host: True  # [win]
-  number: 1001
+  number: 0
+  noarch: generic
   rpaths:
     - lib/R/lib/
     - lib/
@@ -26,6 +25,7 @@ requirements:
     - {{posix}}zip               # [win]
   host:
     - r-base
+    - r-assertthat
     - r-bibtex >=0.4
     - r-codetools
     - r-digest
@@ -37,6 +37,7 @@ requirements:
     - r-xtable
   run:
     - r-base
+    - r-assertthat
     - r-bibtex >=0.4
     - r-codetools
     - r-digest
@@ -54,22 +55,41 @@ test:
 
 about:
   home: https://renozao.github.io/pkgmaker
-  license: GPL (>= 2)
+  license: GPL-2
   summary: Provides some low-level utilities to use for package development. It currently provides
     managers for multiple package specific options and registries, vignette, unit test
     and bibtex related utilities. It serves as a base package for packages like NMF,
     RcppOctave, doRNG, and as an incubator package for other general purposes utilities,
     that will eventually be packaged separately. It is still under heavy development
     and changes in the interface(s) are more than likely to happen.
-  license_family: GPL3
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+  license_family: GPL2
+  license_file:
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
 
 extra:
   recipe-maintainers:
     - conda-forge/r
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
-    - cbrueffer
-    - dbast
+
+# Package: pkgmaker
+# Type: Package
+# Title: Development Utilities for R Packages
+# Version: 0.31
+# Date: 2020-01-21
+# Authors@R: person("Renaud", "Gaujoux", email = "renozao@protonmail.com", role = c("aut", "cre"))
+# Description: Provides some low-level utilities to use for package development. It currently provides managers for multiple package specific options and registries, vignette, unit test and bibtex related utilities. It serves as a base package for packages like NMF, RcppOctave, doRNG, and as an incubator package for other general purposes utilities, that will eventually be packaged separately. It is still under heavy development and changes in the interface(s) are more than likely to happen.
+# License: GPL (>= 2)
+# URL: https://renozao.github.io/pkgmaker
+# BugReports: http://github.com/renozao/pkgmaker/issues
+# LazyLoad: yes
+# Encoding: UTF-8
+# Depends: R (>= 3.0.0), methods, stats, registry
+# Imports: tools, grDevices, utils, graphics, codetools, digest, stringi, magrittr, stringr, xtable, withr, bibtex (>= 0.4), assertthat
+# Suggests: devtools (>= 0.8), roxygen2, RUnit, testthat, knitr, rmarkdown, yaml, Biobase, datasets
+# Collate: 'bibtex.R' 'colors.R' 'data.R' 'namespace.R' 'utils.R' 'devutils.R' 'files.R' 'graphics.R' 'options.R' 'logging.R' 'unitTests.R' 'is.R' 'knitr.R' 'registry.R' 'package-extra.R' 'package.R' 'packages.R' 'project.R' 'rd.R' 'user.R' 'vignette.R' 'with.r'
+# RoxygenNote: 7.0.2
+# NeedsCompilation: no
+# Packaged: 2020-01-21 19:29:08 UTC; renaud
+# Author: Renaud Gaujoux [aut, cre]
+# Maintainer: Renaud Gaujoux <renozao@protonmail.com>
+# Repository: CRAN
+# Date/Publication: 2020-01-22 12:50:02 UTC
