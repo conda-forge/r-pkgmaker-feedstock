@@ -3,7 +3,7 @@ About r-pkgmaker
 
 Home: https://renozao.github.io/pkgmaker
 
-Package license: GPL-2
+Package license: GPL-2.0
 
 Feedstock license: BSD 3-Clause
 
