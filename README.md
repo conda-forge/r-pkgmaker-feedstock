@@ -5,11 +5,9 @@ Home: https://renozao.github.io/pkgmaker
 
 Package license: GPL-2.0
 
-Feedstock license: BSD 3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-pkgmaker-feedstock/blob/master/LICENSE.txt)
 
 Summary: Provides some low-level utilities to use for package development. It currently provides managers for multiple package specific options and registries, vignette, unit test and bibtex related utilities. It serves as a base package for packages like NMF, RcppOctave, doRNG, and as an incubator package for other general purposes utilities, that will eventually be packaged separately. It is still under heavy development and changes in the interface(s) are more than likely to happen.
-
-
 
 Current build status
 ====================
