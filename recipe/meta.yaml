@@ -1,4 +1,4 @@
-{% set version = "0.32.8" %}
+{% set version = "0.32.10" %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -10,7 +10,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/pkgmaker_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/pkgmaker/pkgmaker_{{ version }}.tar.gz
-  sha256: 0ff3578d2c051b544c3f105cfe4801575aac1564add048f9e952c53a8ccd1745
+  sha256: 972b0473a64408ccc4841fa3f09a567cc32811e69c3c7e42a2f391a5eb2e2933
 
 build:
   merge_build_host: true  # [win]
